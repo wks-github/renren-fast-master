@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.generator.dao.AuditDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.generator.entity.AuditEntity" id="auditMap">
+        <result property="auditId" column="audit_id"/>
+        <result property="auditRecordId" column="audit_record_id"/>
+        <result property="restName" column="rest_name"/>
+        <result property="auditPeopleId" column="audit_people_id"/>
+        <result property="restId" column="rest_id"/>
+        <result property="auditPeopleName" column="audit_people_name"/>
+        <result property="auditStatus" column="audit_status"/>
+        <result property="reason" column="reason"/>
+        <result property="auditTime" column="audit_time"/>
+        <result property="auditLevel" column="audit_level"/>
+    </resultMap>
+
+
+</mapper>

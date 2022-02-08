@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.generator.dao.ClassDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.generator.entity.ClassEntity" id="classMap">
+        <result property="classId" column="class_id"/>
+        <result property="className" column="class_name"/>
+        <result property="classBrief" column="class_brief"/>
+        <result property="teacherId" column="teacher_id"/>
+        <result property="secretaryId" column="secretary_id"/>
+        <result property="teacherName" column="username"/>
+        <result property="secretaryName" column="secretary_id"/>
+    </resultMap>
+
+    <select id="selectPageList" resultMap="classMap">
+        SELECT
+        class_id,
+        class_name,
+        class_brief,
+        teacher_id,
+        secretary_id,
+        username
+        FROM class c LEFT JOIN sys_user t ON c.teacher_id =t.user_id
+        <where>
+            <if test="params.username != null and params.username != '' ">
+                c.class_name LIKE CONCAT('%',#{params.key}, '%')
+            </if>
+        </where>
+    </select>
+
+</mapper>

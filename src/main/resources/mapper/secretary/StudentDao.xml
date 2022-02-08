@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.secretary.dao.StudentDao">
+    <!-- 查询用户的所有权限 -->
+
+
+    <select id="selectStudentList" resultType="io.renren.modules.common.entity.Student">
+        SELECT
+        u.user_id,
+        username,
+        password,
+        salt,
+        email,
+        mobile,
+        statu,
+        u.create_time
+        FROM
+        sys_user u
+        LEFT JOIN sys_user_role ur
+        ON u.user_id = ur.user_id
+        LEFT JOIN sys_role sr
+        ON ur.role_id = sr.role_id
+        <where>
+            <if test="params.username != null and params.username != '' ">
+                u.username LIKE CONCAT('%',#{params.username}, '%')
+            </if>
+            and sr.role_id = 1
+        </where>
+
+    </select>
+
+</mapper>
